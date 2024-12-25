@@ -1,3 +1,4 @@
 /modules/eks/.terraform/
 /modules/vpc/.terraform/
 /modules/csi/.terraform/
+/kubectl

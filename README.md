@@ -87,5 +87,13 @@ attach to the pod.
   Warning  FailedAttachVolume  118s                   attachdetach-controller  AttachVolume.Attach failed for volume "ebs-pv" : rpc error: code = Internal desc = Could not attach volume "vol-0f7fe1b48c276129f" to node "i-043ec2fb8a4991e6c": could not attach volume "vol-0f7fe1b48c276129f" to node "i-043ec2fb8a4991e6c": operation error EC2: AttachVolume, https response error StatusCode: 400, RequestID: d20f2f5f-24b3-48c4-a484-36cb6816fd2f, api error InvalidVolume.ZoneMismatch: The volume 'vol-0f7fe1b48c276129f' is not in the same availability zone as instance 'i-043ec2fb8a4991e6c'
 ```
 
+Create a new volume in the correct AZ then delete the pod, pvc and pv. Update the PV with the new vol
+and re-create the pv, pvc and pod. The storage will now attach to the pod.
+
+```
+/dev/nvme1n1    9.8G   28K  9.8G   1% /data
+```
+
+
 
 

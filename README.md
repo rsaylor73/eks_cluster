@@ -54,4 +54,11 @@ and update the vol-xxxxx in the yaml file.
 ```
 aws ec2 create-volume --size 10 --region us-east-1 --availability-zone us-east-1a --volume-type gp2
 kubectl create -f persistentvolume.yaml
+kubectl get pv
+```
+
+Create a persistent volume claim
+
+```
+kubectl create -f peristentvolumeclaim.yaml
 ```

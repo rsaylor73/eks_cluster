@@ -12,4 +12,4 @@ spec:
   storageClassName: gp2
   csi:
     driver: ebs.csi.aws.com
-    volumeHandle: vol-0f7fe1b48c276129f
+    volumeHandle: vol-0039bfc589b678653

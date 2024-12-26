@@ -52,7 +52,7 @@ Create a persistent volume from pod-examples/persistentvolume.yaml. Be sure to r
 and update the vol-xxxxx in the yaml file.
 
 ```
-aws ec2 create-volume --size 10 --region us-east-1 --availability-zone us-east-1a --volume-type gp2
+aws ec2 create-volume --size 10 --region us-east-1 --availability-zone us-east-1b --volume-type gp2
 kubectl create -f persistentvolume.yaml
 kubectl get pv
 ```
@@ -61,4 +61,31 @@ Create a persistent volume claim
 
 ```
 kubectl create -f peristentvolumeclaim.yaml
+kubectl get pvc
+kubectl events
 ```
+
+The event might indicate the pvc is waiting to be consumed?
+
+```
+14s (x3 over 40s)   Normal    WaitForFirstConsumer      PersistentVolumeClaim/ebs-pvc     waiting for first consumer to be created before binding
+```
+
+Create a POD and attach the pvc volume
+
+```
+kubectl create -f pod-nginx.yaml
+kubectl get pvc
+```
+
+The PVC will now show it has been bound.
+
+It is important that the volume is created in the same availability zone as the nodes or the volume will never
+attach to the pod.
+
+```
+  Warning  FailedAttachVolume  118s                   attachdetach-controller  AttachVolume.Attach failed for volume "ebs-pv" : rpc error: code = Internal desc = Could not attach volume "vol-0f7fe1b48c276129f" to node "i-043ec2fb8a4991e6c": could not attach volume "vol-0f7fe1b48c276129f" to node "i-043ec2fb8a4991e6c": operation error EC2: AttachVolume, https response error StatusCode: 400, RequestID: d20f2f5f-24b3-48c4-a484-36cb6816fd2f, api error InvalidVolume.ZoneMismatch: The volume 'vol-0f7fe1b48c276129f' is not in the same availability zone as instance 'i-043ec2fb8a4991e6c'
+```
+
+
+

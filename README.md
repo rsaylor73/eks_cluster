@@ -33,3 +33,25 @@ If you get an API error with v1alpha1 in ~/.kube/config change that to v1beta1
 terraform plan -destroy
 terraform apply -destroy
 ```
+
+# Persistent Volume
+
+The CSI driver should be installed with the code in this package.
+
+```
+kubectl get csidriver ebs.csi.aws.com
+```
+
+The default storage class should be gp2
+
+```
+kubectl get sc
+```
+
+Create a persistent volume from pod-examples/persistentvolume.yaml. Be sure to register an volume first
+and update the vol-xxxxx in the yaml file.
+
+```
+aws ec2 create-volume --size 10 --region us-east-1 --availability-zone us-east-1a --volume-type gp2
+kubectl create -f persistentvolume.yaml
+```

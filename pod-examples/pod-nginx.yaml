@@ -10,3 +10,10 @@ spec:
         requests:
           memory: "64Mi"
           cpu: "0.5"
+      volumeMounts:
+        - mountPath: "/data"
+          name: ebs-storage
+  volumes:
+    - name: ebs-storage
+      persistentVolumeClaim:
+        claimName: ebs-pvc

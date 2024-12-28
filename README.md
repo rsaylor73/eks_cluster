@@ -16,7 +16,7 @@ Note: make a backup of ~/.kube/config first. Best to remove file before running 
 another cluster or minikube.
 
 ```
-aws eks --region us-east-1 update-kubeconfig --name <output.cluster_name> --profile <profile.name>
+aws eks --region us-east-1 update-kubeconfig --name eks-demo
 ```
 
 Verify kubectl is working:

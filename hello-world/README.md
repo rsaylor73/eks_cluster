@@ -28,7 +28,14 @@ kubectl apply -f frontend2-service.yaml
 kubectl apply -f ingressclass.yaml
 kubectl apply -f ingress.yaml
 ```
- 
+
+You might have to wait a few minutes for the load balancer to register with the ingress.
+
+```
+kubectl get ingress
+```
+
+Once the Address field has the load balancer DNS value you should be ready to start using the load balancer.
 
 # Load Balancer
 

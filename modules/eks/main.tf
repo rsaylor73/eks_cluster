@@ -33,6 +33,7 @@ module "eks" {
       desired_size = var.node_group1_desired_size
     }
 
+    /*
     two = {
       name = var.node_group2_name
 
@@ -42,5 +43,6 @@ module "eks" {
       max_size     = var.node_group2_max_size
       desired_size = var.node_group2_desired_size
     }
+    */
   }
 }

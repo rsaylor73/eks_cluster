@@ -32,7 +32,10 @@ kubectl apply -f ingress.yaml
 
 # Load Balancer
 
-The URL should be loadbalancer-dns-name/nginx1 and loadbalancer-dns-name/nginx2
+The URL should be loadbalancer-dns-name/nginx and loadbalancer-dns-name/httpd
+
+Note: If you discover that one works vs the other does not please make sure you
+have enabled a NAT gateway for every private subnet in the VPC module.
 
 
 

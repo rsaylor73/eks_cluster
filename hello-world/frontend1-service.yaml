@@ -6,9 +6,9 @@ metadata:
   name: frontend1service
   namespace: default
 spec:
-  clusterIP: 10.1.3.200
+  clusterIP: 172.20.10.200
   clusterIPs:
-    - 10.1.3.200
+    - 172.20.10.200
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4

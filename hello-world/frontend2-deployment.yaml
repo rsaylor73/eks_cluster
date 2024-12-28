@@ -4,8 +4,8 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
   labels:
-    app: frontend1
-  name: frontend1
+    app: frontend2
+  name: frontend2
   namespace: default
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: frontend1
+      app: frontend2
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,12 +22,12 @@ spec:
   template:
     metadata:
       labels:
-        app: frontend1
+        app: frontend2
     spec:
       containers:
-        - image: httpd
+        - image: nginx
           imagePullPolicy: Always
-          name: httpd
+          name: nginx
           ports:
             - containerPort: 80
               protocol: TCP

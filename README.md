@@ -4,8 +4,8 @@ Update the settings in variables.tf including the cluster name and VPC CIDRs.
 
 ```
 terraform init
-terraform plan
-terraform apply
+terraform plan -out plan.txt
+terraform apply "plan.txt"
 ```
 
 ### Connect with Kubectl

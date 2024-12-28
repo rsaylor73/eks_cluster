@@ -18,3 +18,11 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
 --set clusterName=eks-demo \
 --set serviceAccount.create=false \
 --set serviceAccount.name=aws-load-balancer-controller
+
+Install the ingress
+
+> kubectl create -f hello-world/ingress.yaml
+> kubectl get ingress
+
+You should now see the ingress
+

@@ -18,12 +18,12 @@ https://github.com/jmbharathram/executeoncommand/tree/master/ingress
 
 Check the IP values in frontend1-service.yaml before deploying.
 
-kubectl create -f frontend1-deployment.yaml 
-kubectl create -f frontend1-service.yaml
-kubectl create -f frontend2-deployment.yaml
-kubectl create -f frontend2-service.yaml
-kubectl create -f ingressclass.yaml
-kubectl create -f ingress.yaml
+kubectl apply -f frontend1-deployment.yaml 
+kubectl apply -f frontend1-service.yaml
+kubectl apply -f frontend2-deployment.yaml
+kubectl apply -f frontend2-service.yaml
+kubectl apply -f ingressclass.yaml
+kubectl apply -f ingress.yaml
  
 
 # Load Balancer

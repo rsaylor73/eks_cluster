@@ -15,12 +15,12 @@ spec:
                 name: frontend1service
                 port:
                   number: 80
-            path: /nginx1
+            path: /httpd
             pathType: Exact
           - backend:
               service:
                 name: frontend2service
                 port:
                   number: 80
-            path: /nginx2
+            path: /nginx
             pathType: Exact

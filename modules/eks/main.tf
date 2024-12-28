@@ -20,7 +20,6 @@ module "eks" {
 
   eks_managed_node_group_defaults = {
     ami_type = var.ami_type
-
   }
 
   eks_managed_node_groups = {

@@ -12,7 +12,7 @@ module "vpc" {
   public_subnets  = [var.public_subnet_cidr1, var.public_subnet_cidr2]
 
   enable_nat_gateway   = true
-  single_nat_gateway   = true
+  single_nat_gateway   = false
   enable_dns_hostnames = true
 
   public_subnet_tags = {

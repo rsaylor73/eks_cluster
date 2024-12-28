@@ -1,6 +1,6 @@
 # Installation
 
-Update the settings in variables.tf including the cluster name and VPC CIDRs.
+Update the settings in terraform.tfvars including the cluster name and VPC CIDRs.
 
 ```
 terraform init

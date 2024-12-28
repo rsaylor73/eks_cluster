@@ -84,7 +84,8 @@ kubectl get pvc
 The PVC will now show it has been bound.
 
 It is important that the volume is created in the same availability zone as the nodes or the volume will never
-attach to the pod.
+attach to the pod. You can create taints to tell the scheduler what pod should bind to what node to use
+the volume in the desired availability zone.
 
 ```
   Warning  FailedAttachVolume  118s                   attachdetach-controller  AttachVolume.Attach failed for volume "ebs-pv" : rpc error: code = Internal desc = Could not attach volume "vol-0f7fe1b48c276129f" to node "i-043ec2fb8a4991e6c": could not attach volume "vol-0f7fe1b48c276129f" to node "i-043ec2fb8a4991e6c": operation error EC2: AttachVolume, https response error StatusCode: 400, RequestID: d20f2f5f-24b3-48c4-a484-36cb6816fd2f, api error InvalidVolume.ZoneMismatch: The volume 'vol-0f7fe1b48c276129f' is not in the same availability zone as instance 'i-043ec2fb8a4991e6c'

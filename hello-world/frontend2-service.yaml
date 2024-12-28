@@ -7,9 +7,9 @@ metadata:
   name: frontend2service
   namespace: default
 spec:
-  clusterIP: 172.30.150.82
+  clusterIP: 172.20.150.82
   clusterIPs:
-    - 172.30.150.82
+    - 172.20.150.82
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4

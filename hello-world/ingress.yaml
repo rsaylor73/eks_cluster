@@ -12,10 +12,10 @@ spec:
         paths:
           - backend:
               service:
-                name: frontend1service
+                name: frontend2service
                 port:
                   number: 80
-            path: /httpd
+            path: /httpd2
             pathType: Exact
           - backend:
               service:

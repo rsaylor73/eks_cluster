@@ -20,6 +20,11 @@ module "eks" {
 
   eks_managed_node_group_defaults = {
     ami_type = var.ami_type
+
+    # new **
+    iam_role_additional_policies = {
+      AmazonEBSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+    }
   }
 
   cloudwatch_log_group_class = "STANDARD"
@@ -36,17 +41,9 @@ module "eks" {
       max_size     = var.node_group1_max_size
       desired_size = var.node_group1_desired_size
     }
+  }
 
-    /*
-    two = {
-      name = var.node_group2_name
-
-      instance_types = [var.node_group2_instance_type]
-
-      min_size     = var.node_group2_min_size
-      max_size     = var.node_group2_max_size
-      desired_size = var.node_group2_desired_size
-    }
-    */
+  tags = {
+    env       = var.env_name
   }
 }

@@ -2,3 +2,4 @@
 /modules/vpc/.terraform/
 /modules/csi/.terraform/
 /kubectl
+/modules/alb/.terraform/

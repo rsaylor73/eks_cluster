@@ -22,6 +22,10 @@ module "eks" {
     ami_type = var.ami_type
   }
 
+  cloudwatch_log_group_class = "STANDARD"
+
+  cloudwatch_log_group_retention_in_days = "7"
+
   eks_managed_node_groups = {
     one = {
       name = var.node_group1_name

@@ -34,6 +34,9 @@ terraform plan -destroy
 terraform apply -destroy
 ```
 
+Note: If you made any manual actions like a load balancer or an volume you must delete those manually or
+terraform apply -destroy will not finish properly.
+
 # Persistent Volume
 
 The CSI driver should be installed with the code in this package.

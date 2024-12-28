@@ -4,10 +4,8 @@ module "vpc" {
   vpc_cidr = var.vpc_cidr
   private_subnets_cidr1 = var.private_subnets_cidr1
   private_subnets_cidr2 = var.private_subnets_cidr2
-  private_subnets_cidr3 = var.private_subnets_cidr3
   public_subnet_cidr1 = var.public_subnet_cidr1
   public_subnet_cidr2 = var.public_subnet_cidr2
-  public_subnet_cidr3 = var.public_subnet_cidr3
 }
 
 module "eks" {

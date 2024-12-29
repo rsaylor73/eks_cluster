@@ -16,6 +16,3 @@ node_group2_instance_type="t3.medium"
 node_group2_min_size="1"
 node_group2_desired_size="1"
 node_group2_max_size="1"
-
-env_name="dev"
-main_region="us-east-1"

@@ -14,5 +14,3 @@ variable "node_group2_min_size" {}
 variable "node_group2_max_size" {}
 variable "node_group2_desired_size" {}
 variable "csi_iam_role_arn" {}
-variable "env_name" {}
-

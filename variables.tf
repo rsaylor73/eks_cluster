@@ -16,6 +16,3 @@ variable "node_group2_instance_type" {}
 variable "node_group2_min_size" {}
 variable "node_group2_max_size" {}
 variable "node_group2_desired_size" {}
-
-variable "env_name" {}
-variable "main_region" {}

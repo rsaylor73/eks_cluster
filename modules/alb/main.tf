@@ -36,7 +36,7 @@ resource "kubernetes_service_account" "service-account" {
 }
 
 ################################################################################
-# Install Load Balancer Controler With Helm
+# Install Load Balancer Controller With Helm
 ################################################################################
 
 resource "helm_release" "lb" {

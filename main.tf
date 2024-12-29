@@ -33,3 +33,10 @@ module "csi" {
   cluster_name  = module.eks.cluster_name
   oidc_provider = module.eks.oidc_provider
 }
+
+module "alb" {
+  source = "./modules/alb"
+  cluster_name  = module.eks.cluster_name
+  region        = var.region
+  vpc_id        = module.vpc.vpc_id
+}

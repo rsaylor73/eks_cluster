@@ -20,11 +20,6 @@ module "eks" {
   node_group1_max_size = var.node_group1_max_size
   node_group1_min_size = var.node_group1_min_size
   node_group1_name = var.node_group1_name
-  node_group2_desired_size = var.node_group2_desired_size
-  node_group2_instance_type = var.node_group2_instance_type
-  node_group2_max_size = var.node_group2_max_size
-  node_group2_min_size = var.node_group2_min_size
-  node_group2_name = var.node_group2_name
   csi_iam_role_arn = module.csi.csi_iam_role_arn
 }
 
@@ -32,11 +27,4 @@ module "csi" {
   source = "./modules/csi"
   cluster_name  = module.eks.cluster_name
   oidc_provider = module.eks.oidc_provider
-}
-
-module "alb" {
-  source = "./modules/alb"
-  cluster_name  = module.eks.cluster_name
-  region        = var.region
-  vpc_id        = module.vpc.vpc_id
 }

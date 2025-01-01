@@ -1,6 +1,15 @@
 # AWS Load Balancer Controller
 
+Source:
 https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html
+https://harsh05.medium.com/path-based-routing-with-aws-load-balancer-controller-an-ingress-journey-on-amazon-eks-733d3c6c5adf
+
+Note: Following the guide the AWS Load Balancer was created but the target groups did not
+register any nodes and the rules did not get applied.
+
+(img.png)
+
+# Install
 
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
 
@@ -166,7 +175,7 @@ Expose the deployments:
 
 ```
 kubectl expose deployment web --type=NodePort --port=8080
-kubectl expose deployment web2 --port=8080 --type=NodePort
+kubectl expose deployment web2 --type=NodePort --port=8080 
 ```
 
 Expected output:

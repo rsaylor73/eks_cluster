@@ -65,3 +65,52 @@ Expected output:
 NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
 aws-load-balancer-controller   0/2     0            0           15m
 ```
+
+Apply Ingres Class
+
+```
+kubectl apply -f ingress-class.yaml
+```
+
+Verify it is running
+
+```
+kubectl get ingressclass/ingres-class
+```
+
+Expected output:
+
+```
+NAME           CONTROLLER            PARAMETERS   AGE
+ingres-class   ingress.k8s.aws/alb   <none>       46s
+```
+
+Create deployment and exposing applications:
+
+```
+kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0
+kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0
+```
+
+Expose the deployments:
+
+```
+kubectl expose deployment web --type=NodePort --port=8080
+kubectl expose deployment web2 --port=8080 --type=NodePort
+```
+
+Note: This step is failing could be some conflict on the account from past tries...
+
+```
+Error from server (InternalError): Internal error occurred: failed calling webhook "mservice.elbv2.k8s.aws": failed to call webhook: Post "https://aws-load-balancer-webhook-service.kube-system.svc:443/mutate-v1-service?timeout=10s": no endpoints available for service "aws-load-balancer-webhook-service"
+```
+
+Apply Ingress rules
+
+```
+kubectl apply -f ingress-rules.yaml
+```
+
+The load balancer should launch and you will be able to access the applications via:
+http://load-balancer-url/v1
+http://load-balancer-url/v2

@@ -4,14 +4,6 @@ AWS Documentation:
 
 https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html
 
-Note: Following the guide the AWS Load Balancer was created but the target groups did not
-register any nodes and the rules did not get applied.
-
-(img.png)
-
-Some notes on binding the instances to the targets:
-https://stackoverflow.com/questions/66526636/eks-nodes-not-registering-in-target-group-using-alb-ingress-controller
-
 # Install
 
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json

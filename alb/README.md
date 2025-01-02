@@ -1,8 +1,8 @@
 # AWS Load Balancer Controller
 
-Source:
+AWS Documentation:
+
 https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html
-https://harsh05.medium.com/path-based-routing-with-aws-load-balancer-controller-an-ingress-journey-on-amazon-eks-733d3c6c5adf
 
 Note: Following the guide the AWS Load Balancer was created but the target groups did not
 register any nodes and the rules did not get applied.

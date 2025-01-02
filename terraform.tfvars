@@ -1,4 +1,4 @@
-cluster_name="eks-demo"
+cluster_name="eks-demo-v2"
 vpc_cidr="10.1.0.0/16"
 private_subnets_cidr1="10.1.1.0/24"
 private_subnets_cidr2="10.1.2.0/24"

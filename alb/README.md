@@ -159,6 +159,12 @@ aws-load-balancer-controller-5c7dc76d68-fqtwh   1/1     Running   0          94s
 aws-load-balancer-controller-5c7dc76d68-q5cct   1/1     Running   0          94s
 ```
 
+Create deployment and service
+
+```
+kubectl apply -f deployment.yaml
+```
+
 Apply Ingres Class
 
 ```
@@ -178,29 +184,7 @@ NAME           CONTROLLER            PARAMETERS   AGE
 ingres-class   ingress.k8s.aws/alb   <none>       46s
 ```
 
-Create deployment and exposing applications:
-
-```
-kubectl apply -f deployment.yaml
-# kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0
-# kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0
-```
-
-Expose the deployments: (updated yaml exposes with a NodePort)
-
-```
-#kubectl expose deployment web --type=NodePort --port=8080
-#kubectl expose deployment web2 --type=NodePort --port=8080 
-```
-
-Expected output:
-
-```
-service/web exposed
-service/web2 exposed
-```
-
-Apply Ingress rules
+Apply Ingress rules (This will create the AWS ALB)
 
 ```
 kubectl apply -f ingress-rules.yaml
@@ -208,3 +192,17 @@ kubectl apply -f ingress-rules.yaml
 
 The load balancer should launch and you will be able to access the applications via:
 http://load-balancer-url/nginx
+
+Note: The example above in the deployment will be looking for a directory called nginx so
+you will need to modify the document root a little. You can also adjust the path in the ingress-rules.yaml
+file.
+
+```
+kubectl exec -it <pod-name> -- /bin/bash
+cd /usr/share/nginx/html/
+mkdir nginx
+cp index.html nginx/
+```
+Now when you visit http://load-balancer-dns-name/nginx you should see the following:
+
+Welcome to nginx!

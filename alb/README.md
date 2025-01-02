@@ -21,7 +21,7 @@ Expected output:
     "Policy": {
         "PolicyName": "AWSLoadBalancerControllerIAMPolicy",
         "PolicyId": "ANPA6GSNG3KEO74D4SSB7",
-        "Arn": "arn:aws:iam::976193247880:policy/AWSLoadBalancerControllerIAMPolicy",
+        "Arn": "arn:aws:iam::xxxxxxxxx:policy/AWSLoadBalancerControllerIAMPolicy",
         "Path": "/",
         "DefaultVersionId": "v1",
         "AttachmentCount": 0,
@@ -41,7 +41,7 @@ eksctl create iamserviceaccount \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
-  --attach-policy-arn=arn:aws:iam::976193247880:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::xxxxxxxxx:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve
 ```
 
@@ -87,7 +87,7 @@ helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller \
     --set clusterName=eks-demo \
     --set serviceAccount.create=false \
     --set region=us-east-1 \
-    --set vpcId=vpc-069c83cc0370c9b2a \
+    --set vpcId=vpc-xxxxxxxxx \
     --set serviceAccount.name=aws-load-balancer-controller \
     -n kube-system  
 ```
@@ -182,12 +182,13 @@ Apply Ingress rules (This will create the AWS ALB)
 kubectl apply -f ingress-rules.yaml
 ```
 
-The load balancer should launch and you will be able to access the applications via:
+The load balancer should launch, and you will be able to access the applications via:
 http://load-balancer-url/nginx
 
 Note: The example above in the deployment will be looking for a directory called nginx so
-you will need to modify the document root a little. You can also adjust the path in the ingress-rules.yaml
-file.
+you will need to modify the document root a little. 
+
+You can also adjust the path in the ingress-rules.yaml file.
 
 ```
 kubectl exec -it <pod-name> -- /bin/bash

@@ -28,15 +28,15 @@ Expected output:
 {
     "Policy": {
         "PolicyName": "AWSLoadBalancerControllerIAMPolicy",
-        "PolicyId": "ANPA6GSNG3KEPISL5QO7G",
+        "PolicyId": "ANPA6GSNG3KEO74D4SSB7",
         "Arn": "arn:aws:iam::976193247880:policy/AWSLoadBalancerControllerIAMPolicy",
         "Path": "/",
         "DefaultVersionId": "v1",
         "AttachmentCount": 0,
         "PermissionsBoundaryUsageCount": 0,
         "IsAttachable": true,
-        "CreateDate": "2025-01-02T13:11:29+00:00",
-        "UpdateDate": "2025-01-02T13:11:29+00:00"
+        "CreateDate": "2025-01-02T14:34:24+00:00",
+        "UpdateDate": "2025-01-02T14:34:24+00:00"
     }
 }
 ```
@@ -45,41 +45,12 @@ Attach the policy
 
 ```
 eksctl create iamserviceaccount \
-  --cluster=eks-demo \
+  --cluster=eks-demo-v2 \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
   --attach-policy-arn=arn:aws:iam::976193247880:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve
-```
-
-To delete the iamserviceaccount:
-
-```
-eksctl delete iamserviceaccount --name aws-load-balancer-controller --cluster eks-demo
-```
-
-Install AWS Load Balancer Controller
-
-```
-helm repo add eks https://aws.github.io/eks-charts
-
-helm repo update eks
-
-helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
-  -n kube-system \
-  --set clusterName=eks-demo \
-  --set serviceAccount.create=false \
-  --set serviceAccount.name=aws-load-balancer-controller
-  
-  
-helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller \
-    --set clusterName=eks-demo \
-    --set serviceAccount.create=false \
-    --set region=us-east-1 \
-    --set vpcId=vpc-069c83cc0370c9b2a \
-    --set serviceAccount.name=aws-load-balancer-controller \
-    -n kube-system  
 ```
 
 Expected output:
@@ -98,6 +69,49 @@ Expected output:
 2025-01-01 20:51:09 [ℹ]  created serviceaccount "kube-system/aws-load-balancer-controller"
 ```
 
+Note: This creates a CloudFormation stack. If you wish to un-install/re-install delete the stack first.
+
+To delete the iamserviceaccount:
+
+```
+eksctl delete iamserviceaccount --name aws-load-balancer-controller --cluster eks-demo
+```
+
+Install AWS Load Balancer Controller
+
+```
+helm repo add eks https://aws.github.io/eks-charts
+
+helm repo update eks
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=eks-demo-v2 \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller
+  
+  
+helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller \
+    --set clusterName=eks-demo \
+    --set serviceAccount.create=false \
+    --set region=us-east-1 \
+    --set vpcId=vpc-069c83cc0370c9b2a \
+    --set serviceAccount.name=aws-load-balancer-controller \
+    -n kube-system  
+```
+
+Expected output:
+
+NAME: aws-load-balancer-controller
+LAST DEPLOYED: Thu Jan  2 14:40:34 2025
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+AWS Load Balancer controller installed!
+
+
 Verify controller is installed:
 
 ```
@@ -111,32 +125,7 @@ NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
 aws-load-balancer-controller   2/2     2            2           5m20s
 ```
 
-# Installing AWS Load Balancer Controller:
-
-```
-helm repo add eks https://aws.github.io/eks-charts
-
-helm repo update eks
-
-helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
-  -n kube-system \
-  --set clusterName=eks-demo \
-  --set serviceAccount.create=false \
-  --set serviceAccount.name=aws-load-balancer-controller
-```
-
-Expected output:
-
-NAME: aws-load-balancer-controller
-LAST DEPLOYED: Wed Jan  1 20:53:05 2025
-NAMESPACE: kube-system
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-AWS Load Balancer controller installed!
-
-To uninstall:
+Uninstall load balancer:
 
 ```
 helm delete aws-load-balancer-controller -n kube-system
@@ -192,15 +181,16 @@ ingres-class   ingress.k8s.aws/alb   <none>       46s
 Create deployment and exposing applications:
 
 ```
-kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0
-kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0
+kubectl apply -f deployment.yaml
+# kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0
+# kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0
 ```
 
-Expose the deployments:
+Expose the deployments: (updated yaml exposes with a NodePort)
 
 ```
-kubectl expose deployment web --type=NodePort --port=8080
-kubectl expose deployment web2 --type=NodePort --port=8080 
+#kubectl expose deployment web --type=NodePort --port=8080
+#kubectl expose deployment web2 --type=NodePort --port=8080 
 ```
 
 Expected output:
@@ -217,5 +207,4 @@ kubectl apply -f ingress-rules.yaml
 ```
 
 The load balancer should launch and you will be able to access the applications via:
-http://load-balancer-url/v1
-http://load-balancer-url/v2
+http://load-balancer-url/nginx
